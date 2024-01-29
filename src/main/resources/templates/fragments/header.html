@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+	<div id="header" th:fragment="header" style="background-color: #eee;">
+		<div>
+			<span><a href="/">index</a></span>
+		</div>
+		<div>
+			<!-- 인증되지 않은 (로그인하지 않은) 사용자 -->
+			<span><a sec:authorize="isAnonymous()" th:href="@{/signIn}">로그인</a></span>
+			<!-- 인증이 되었다면(로그인을 한) 사용자 -->
+			<span><a sec:authorize="isAuthenticated()" th:href="@{/logOut}">로그아웃</a></span>
+		</div>
+		<div>
+			<!-- 인증시 사용된 객체의 username(ID) -->
+			<span>🦖username:</span>
+			<span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
+		</div>
+		<div>
+			<!-- 인증시 사용된 객체의 role(권한) -->
+			<span>🦖role : </span>
+			<span sec:authorize="isAuthenticated()" sec:authentication="authorities"></span>
+		</div>
+		<div>
+			<!-- ROLE_ADMIN 권한 있으면 화면에 표시 (출력)  -->
+			<span sec:authorize="hasRole('ADMIN')">관리자</span>
+			<!-- ROLE_ADMIN 권한 있으면 화면에 표시 (출력) --> 
+			<span sec:authorize="hasRole('USER')">사용자</span>
+		</div>
+	</div>
+	</div>
+</html>
